@@ -1,9 +1,3 @@
-/**
- * Learn more about deep linking with React Navigation
- * https://reactnavigation.org/docs/deep-linking
- * https://reactnavigation.org/docs/configuring-links
- */
-
 import { LinkingOptions } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 
@@ -13,21 +7,25 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL('/')],
   config: {
     screens: {
-      Root: {
+      Login: {
         screens: {
-          TabOne: {
+          SignIn: {
             screens: {
-              TabOneScreen: 'one',
-            },
+              SignInScreen: 'signin'
+            }
           },
-          TabTwo: {
+          SignUp: {
             screens: {
-              TabTwoScreen: 'two',
-            },
+              SignUpScreen: 'signup'
+            }
           },
-        },
+          RecoverPassword: {
+            screens: {
+              RecoverPasswordScreen: 'recover_password'
+            }
+          }
+        }
       },
-      Modal: 'modal',
       NotFound: '*',
     },
   },
