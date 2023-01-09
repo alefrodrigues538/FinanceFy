@@ -1,13 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MainParamList } from "../types";
 
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
 import HomeScreen from "../screens/Home";
 import Transactions from "../screens/Transactions";
 import Earnings from "../screens/Earnings";
 import Expenses from "../screens/Expenses";
 import Settings from "../screens/Settings";
+import Colors from "../constants/Colors";
 
 
 const BottomTab = createBottomTabNavigator<MainParamList>();
@@ -19,23 +20,27 @@ export default function MainNavigator() {
 
     return (
         <BottomTab.Navigator
-            initialRouteName="Home"
+            initialRouteName="Transactions"
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarButton: hiddenTabs.includes(route.name) ? () => null : undefined,
+                tabBarInactiveTintColor: Colors.gray,
+                tabBarActiveTintColor: Colors.primary,
+                tabBarStyle: { shadowOpacity: 0, shadowColor: '#0000', borderTopColor: '#0000' }
             })}>
-            <BottomTab.Screen name="Home" component={HomeScreen} options={{
-                tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
-            }} />
             <BottomTab.Screen name="Transactions" component={Transactions} options={{
-                tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
+                tabBarIcon: ({ color }) => <MaterialIcons name="compare-arrows" size={30} color={color} />
             }} />
             <BottomTab.Screen name="Earnings" component={Earnings} options={{
-                tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
+                tabBarIcon: ({ color }) => <MaterialIcons name="payment" size={30} color={color} />
             }} />
             <BottomTab.Screen name="Expenses" component={Expenses} options={{
-                tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
+                tabBarIcon: ({ color }) => <MaterialIcons name="list-alt" size={30} color={color} />
+            }} />
+
+            <BottomTab.Screen name="Home" component={HomeScreen} options={{
+                tabBarIcon: ({ color }) => <AntDesign name="appstore-o" size={30} color={color} />
             }} />
             <BottomTab.Screen name="Settings" component={Settings} />
         </BottomTab.Navigator >

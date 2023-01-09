@@ -1,11 +1,19 @@
+import React from 'react'
 import 'react-native-gesture-handler';
 
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import useCachedResources from './src/hooks/useCachedResources';
+import useColorScheme from './src/hooks/useColorScheme';
+import Navigation from './src/navigation';
+
+//FIREBASE LOAD
+import * as firebase from './src/config/firebase';
+
+//REDUX TOOLKIT
+import { Provider } from 'react-redux';
+import store from './src/store';
 
 export default function App() {
 
@@ -16,10 +24,12 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <Navigation />
+          <StatusBar />
+        </SafeAreaProvider>
+      </Provider>
     );
   }
 }
