@@ -1,26 +1,50 @@
 import * as React from "react";
 import { View, Button } from "react-native";
 
-import * as firebase from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import * as WebBrowser from 'expo-web-browser'
+import * as Google from 'expo-auth-session/providers/google'
+import OAuthGoogle from '../config/OAuthGoogle'
+import { storeData } from '../hooks/useAsyncStorage';
 
-// Faça a configuração inicial do Firebase aqui
+const ButtonSignInWithGoogle = () => {
+    const [accessToken, setAccessToken] = React.useState<any>(null)
+    const [user, setUser] = React.useState(null);
 
-const googleProvider = new GoogleAuthProvider();
+    const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+        clientId: OAuthGoogle.web,
+        iosClientId: OAuthGoogle.ios,
+        androidClientId: OAuthGoogle.android
+    });
 
-const handleGoogleSignIn = async () => {
-    const auth = getAuth()
-    try {
-        await signInWithPopup(auth, googleProvider)
-    } catch (error) {
-        console.error(error);
+    React.useEffect(() => {
+
+        if (response?.type === "success") {
+            setAccessToken(response.authentication?.accessToken)
+            storeData("accessToken", accessToken);
+            accessToken && fetchUserInfo();
+
+            console.log(accessToken, user);
+
+        }
+
+    }, [response, accessToken])
+
+    async function fetchUserInfo() {
+        let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        const userInfo = await response.json();
+        setUser(userInfo)
     }
-};
 
-const ButtonSignInWithGoogle = () => (
-    <View>
-        <Button title="Sign in with Google" onPress={handleGoogleSignIn} />
-    </View>
-);
+    return (
+        <View>
+            <Button title="Sign in with Google" onPress={fetchUserInfo} />
+        </View>
+    )
+};
 
 export default ButtonSignInWithGoogle;

@@ -20,7 +20,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIden": "com.virtuamoon.FinanceFy"
+      "bundleIden": "com.virtuamoon.FinanceFy",
+      "bundleIdentifier": "n"
     },
     "android": {
       "package": "com.virtuamoon.FinanceFy",

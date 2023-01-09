@@ -1,6 +1,4 @@
-import firebase from '../config/firebase'
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
-import "firebase/auth"
+import React from 'react'
 
 class Auth {
     email: string;
@@ -18,23 +16,6 @@ class Auth {
     }
 
     static async signInWithGoogle() {
-
-        const auth = getAuth()
-        const googleProvider = new GoogleAuthProvider();
-
-        try {
-
-            const result = await signInWithPopup(auth, googleProvider);
-
-            console.log(result);
-
-
-            return result;
-        } catch (error) {
-
-            return error;
-
-        }
     }
 }
 
