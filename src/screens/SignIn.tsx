@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import { Alert, Text, View } from 'react-native';
-import { Button, Column, Container, Heading, Paragraph, Row } from '../components/GlobalComponents';
+import React from 'react';
+import { Button, Column, Container, Heading, Row } from '../components/GlobalComponents';
 import { Input } from '../components/Input';
 import { SignInScreenProps } from '../types';
-
-import { FontAwesome5 } from "@expo/vector-icons"
-import Colors from '../constants/Colors';
 
 const SignIn = ({ navigation }: SignInScreenProps) => {
 
