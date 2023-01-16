@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextProps, TouchableHighlight, TouchableHighlightProps, TouchableOpacity, TouchableOpacityProps, View, ViewProps } from "react-native";
+import { Text, TextProps, TouchableOpacity, TouchableOpacityProps, View, ViewProps } from "react-native";
 import Colors from '../constants/Colors';
 
 //CONTAINER---------------------------------------------------
@@ -93,12 +93,12 @@ export const Container: React.FC<ContainerProps> = ({
     <View {...props}
         style={{
             flex: 1,
-            minWidth,
-            width,
-            maxWidth,
-            minHeight,
-            height,
-            maxHeight,
+            minWidth: minWidth || undefined,
+            width: width || undefined,
+            maxWidth: maxWidth || undefined,
+            minHeight: minHeight || undefined,
+            height: height || undefined,
+            maxHeight: maxHeight || undefined,
             alignItems: alignItems || "center",
             justifyContent: justifyContent || "center",
             backgroundColor: backgroundColor || Colors.white,
@@ -189,12 +189,12 @@ export const Row: React.FC<ContainerProps> = ({
             flexDirection: flexDirection || "row",
             alignItems: alignItems || "center",
             justifyContent: justifyContent || "center",
-            minWidth,
+            minWidth: minWidth || undefined,
             width: width || undefined,
-            maxWidth,
-            minHeight,
+            maxWidth: maxWidth || undefined,
+            minHeight: minHeight || undefined,
             height: height || undefined,
-            maxHeight,
+            maxHeight: maxHeight || undefined,
             backgroundColor,
             borderColor,
             borderWidth,
@@ -282,12 +282,12 @@ export const Column: React.FC<ContainerProps> = ({
             flexDirection: flexDirection || "column",
             alignItems: alignItems || "center",
             justifyContent: justifyContent || "center",
-            minWidth,
+            minWidth: minWidth || undefined,
             width: width || undefined,
-            maxWidth,
-            minHeight,
+            maxWidth: maxWidth || undefined,
+            minHeight: minHeight || undefined,
             height: height || undefined,
-            maxHeight,
+            maxHeight: maxHeight || undefined,
             backgroundColor,
             borderColor,
             borderWidth,

@@ -11,10 +11,15 @@ const SignIn = ({ navigation }: SignInScreenProps) => {
 
     return (
         <Container>
-            <Row flex={3}>
+            <Row flex={4}
+                width={"100%"}
+                alignItems="flex-end">
                 <Heading title='SignIn' />
             </Row>
-            <Column flex={6} alignItems="flex-start">
+            <Column flex={5}
+                alignItems="flex-start"
+                justifyContent="flex-start"
+                paddingTop={16}>
                 <Input
                     required
                     placeholder='nome@email.com'
@@ -32,9 +37,16 @@ const SignIn = ({ navigation }: SignInScreenProps) => {
 
                 <Button
                     variation='link'
+                    title='Recuperar senha.'
+                />
+
+            </Column>
+            <Row flex={1} maxHeight={50}>
+                <Button
+                    variation='link'
                     title='Ainda não possui uma conta? Cadastre-se aqui!'
                 />
-            </Column>
+            </Row>
         </Container>
     );
 }

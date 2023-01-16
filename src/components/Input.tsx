@@ -4,7 +4,8 @@ import Colors from "../constants/Colors";
 import { Column, Paragraph, CustomTextProps, Row, ContainerProps } from "./GlobalComponents";
 
 interface InputProps extends TextInputProps {
-    containerProps?: ViewProps;
+    containerProps?: ContainerProps;
+    inputContainerProps?: ContainerProps
     right?: any;
     left?: any;
     required?: boolean;
@@ -18,6 +19,7 @@ interface InputProps extends TextInputProps {
 }
 export const Input: React.FC<InputProps> = ({
     containerProps,
+    inputContainerProps,
     right,
     left,
     required,
@@ -36,8 +38,9 @@ export const Input: React.FC<InputProps> = ({
             paddingHorizontal={8}
             width="100%">
 
+            {/* LABEL */}
             {label &&
-                <Row {...labelContainerProps} width={"100%"} justifyContent="flex-start" alignItems="flex-start">
+                <Row {...labelContainerProps} minWidth={"100%"} justifyContent="flex-start" >
                     <Paragraph {...labelProps}
                         fontWeight="400"
                         fontSize={12}
@@ -47,7 +50,8 @@ export const Input: React.FC<InputProps> = ({
                         <Paragraph title="*" color="red" />}
                 </Row>}
 
-            <Column
+
+            <Column {...inputContainerProps}
                 onTouchStart={() => inputRef.current?.focus()}
                 width="100%"
                 backgroundColor={Colors.white}
@@ -73,7 +77,7 @@ export const Input: React.FC<InputProps> = ({
 
             <Paragraph {...errorProps}
                 title={error ? errorMessage : ""}
-                width="100%"
+                minWidth="100%"
                 color="red"
                 fontWeight="300" />
         </Column>
