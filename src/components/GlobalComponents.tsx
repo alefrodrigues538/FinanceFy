@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, TextProps, TouchableOpacity, TouchableOpacityProps, View, ViewProps } from "react-native";
+import { Image, ImageProps, Text, TextProps, TouchableOpacity, TouchableOpacityProps, View, ViewProps } from "react-native";
 import Colors from '../constants/Colors';
+import { screenHeight, screenWidth } from '../hooks/useDimensions';
 
 //CONTAINER---------------------------------------------------
 export interface ContainerProps extends ViewProps {
@@ -45,6 +46,14 @@ export interface ContainerProps extends ViewProps {
     flexDirection?: "row" | "column" | "row-reverse" | "column-reverse" | undefined;
     alignItems?: "center" | "flex-start" | "flex-end" | undefined;
     justifyContent?: "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly" | undefined;
+    shadowColor?: string;
+    shadowOffset?: {
+        width: number,
+        height: number
+    };
+    shadowOpacity?: number;
+    shadowRadius?: number;
+    elevation?: number;
 }
 export const Container: React.FC<ContainerProps> = ({
     flex,
@@ -88,6 +97,11 @@ export const Container: React.FC<ContainerProps> = ({
     right,
     bottom,
     left,
+    shadowColor,
+    shadowOffset,
+    shadowOpacity,
+    shadowRadius,
+    elevation,
     ...props
 }) => (
     <View {...props}
@@ -133,6 +147,11 @@ export const Container: React.FC<ContainerProps> = ({
             right,
             bottom,
             left,
+            shadowColor,
+            shadowOffset,
+            shadowOpacity,
+            shadowRadius,
+            elevation,
         }}>{props.children}</View>
 )
 //------------------------------------------------------------
@@ -521,7 +540,7 @@ export const Paragraph: React.FC<CustomTextProps> = ({
 export interface ButtonProps extends TouchableOpacityProps, ContainerProps {
     title?: string;
     titleProps?: CustomTextProps;
-    variation?: "primary" | "secondary" | "info" | "success" | "warning" | "danger" | "link";
+    variation?: "primary" | "secondary" | "info" | "success" | "warning" | "danger" | "light" | "link";
     disabled?: boolean;
     rounded?: boolean;
     outline?: boolean;
@@ -580,6 +599,11 @@ export const Button: React.FC<ButtonProps> = ({
     marginBottom,
     marginTop,
     color,
+    shadowColor,
+    shadowOffset,
+    shadowOpacity,
+    shadowRadius,
+    elevation,
     ...props
 }) => (
     <TouchableOpacity {...props}
@@ -602,8 +626,9 @@ export const Button: React.FC<ButtonProps> = ({
                                 variation === "success" ? Colors.green :
                                     variation === "warning" ? Colors.orange :
                                         variation === "danger" ? Colors.red :
-                                            variation === "link" ? "transparent" :
-                                                Colors.primary)
+                                            variation === "light" ? Colors.white :
+                                                variation === "link" ? "transparent" :
+                                                    Colors.primary)
             ,
             borderColor:
                 disabled ? "transparent" :
@@ -614,8 +639,9 @@ export const Button: React.FC<ButtonProps> = ({
                                     variation === "success" ? Colors.green :
                                         variation === "warning" ? Colors.orange :
                                             variation === "danger" ? Colors.red :
-                                                variation === "link" ? "transparent" :
-                                                    Colors.primary)
+                                                variation === "light" ? "transparent" :
+                                                    variation === "link" ? "transparent" :
+                                                        Colors.primary)
                         :
                         ghost ? "transparent" : borderColor,
             borderWidth: outline ? 1 || borderRadius : borderRadius,
@@ -642,6 +668,11 @@ export const Button: React.FC<ButtonProps> = ({
             marginRight,
             marginBottom,
             marginTop,
+            shadowColor,
+            shadowOffset,
+            shadowOpacity,
+            shadowRadius,
+            elevation,
         }}>
 
         <Row>
@@ -660,16 +691,18 @@ export const Button: React.FC<ButtonProps> = ({
                                         variation === "success" ? Colors.green :
                                             variation === "warning" ? Colors.orange :
                                                 variation === "danger" ? Colors.red :
-                                                    variation === "link" ? Colors.blue :
-                                                        Colors.primary) :
+                                                    variation === "light" ? Colors.black :
+                                                        variation === "link" ? Colors.blue :
+                                                            Colors.primary) :
                                 (variation === "primary" ? Colors.white :
                                     variation === "secondary" ? Colors.black :
                                         variation === "info" ? Colors.white :
                                             variation === "success" ? Colors.white :
                                                 variation === "warning" ? Colors.black :
                                                     variation === "danger" ? Colors.white :
-                                                        variation === "link" ? Colors.blue :
-                                                            Colors.white))} />
+                                                        variation === "light" ? Colors.black :
+                                                            variation === "link" ? Colors.blue :
+                                                                Colors.white))} />
 
             {rightElement && <Row {...rightElementProps} position="absolute" right={10}>{rightElement}</Row>}
 
@@ -678,4 +711,115 @@ export const Button: React.FC<ButtonProps> = ({
 
     </TouchableOpacity>
 )
-//------------------------------------------------------
+//------------------------------------------------------------
+
+
+//IMAGE-------------------------------------------------------
+export interface CustomImageProps extends ImageProps {
+    minWidth?: number | string | undefined;
+    width?: number | string | undefined;
+    maxWidth?: number | string | undefined;
+    minHeight?: number | string | undefined;
+    height?: number | string | undefined;
+    maxHeight?: number | string | undefined;
+    responsive?: boolean;
+    backgroundColor?: string | undefined;
+    padding?: number | undefined;
+    paddingVertical?: number | undefined;
+    paddingHorizontal?: number | undefined;
+    paddingTop?: number | undefined;
+    paddingRight?: number | undefined;
+    paddingBottom?: number | undefined;
+    paddingLeft?: number | undefined;
+    margin?: number | undefined;
+    marginVertical?: number | undefined;
+    marginHorizontal?: number | undefined;
+    marginTop?: number | undefined;
+    marginRight?: number | undefined;
+    marginBottom?: number | undefined;
+    marginLeft?: number | undefined;
+    position?: "relative" | "absolute";
+    top?: number | string | undefined;
+    right?: number | string | undefined;
+    bottom?: number | string | undefined;
+    left?: number | string | undefined;
+    shadowColor?: string;
+    shadowOffset?: {
+        width: number,
+        height: number
+    };
+    shadowOpacity?: number;
+    shadowRadius?: number;
+    elevation?: number;
+}
+export const ImageCustom: React.FC<CustomImageProps> = ({
+    minWidth,
+    width,
+    maxWidth,
+    minHeight,
+    height,
+    maxHeight,
+    responsive,
+    backgroundColor,
+    padding,
+    paddingVertical,
+    paddingHorizontal,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    margin,
+    marginVertical,
+    marginHorizontal,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    position,
+    top,
+    right,
+    bottom,
+    left,
+    shadowColor,
+    shadowOffset,
+    shadowOpacity,
+    shadowRadius,
+    elevation,
+    ...props
+}) => (
+    <Image {...props}
+        style={{
+            minWidth,
+            width: (responsive ? Number(width) * screenWidth : width) || 50,
+            maxWidth,
+            minHeight,
+            height: (responsive ? Number(height) * screenHeight : height) || 50,
+            maxHeight,
+            backgroundColor,
+            padding,
+            paddingVertical,
+            paddingHorizontal,
+            paddingTop,
+            paddingRight,
+            paddingBottom,
+            paddingLeft,
+            margin,
+            marginVertical,
+            marginHorizontal,
+            marginTop,
+            marginRight,
+            marginBottom,
+            marginLeft,
+            position,
+            top,
+            right,
+            bottom,
+            left,
+            shadowColor,
+            shadowOffset,
+            shadowOpacity,
+            shadowRadius
+        }}
+    />
+)
+//------------------------------------------------------------

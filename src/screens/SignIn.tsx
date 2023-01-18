@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Column, Container, Heading, Row } from '../components/GlobalComponents';
 import { Input } from '../components/Input';
+import SignInWithGoogle from '../components/SignWithGoogle';
 import { SignInScreenProps } from '../types';
 
 const SignIn = ({ navigation }: SignInScreenProps) => {
@@ -30,6 +31,7 @@ const SignIn = ({ navigation }: SignInScreenProps) => {
                 <Button
                     variation='primary' rounded
                     title='Entrar' />
+                <SignInWithGoogle rounded />
 
                 <Button
                     variation='link'
@@ -41,6 +43,7 @@ const SignIn = ({ navigation }: SignInScreenProps) => {
                 <Button
                     variation='link'
                     title='Ainda não possui uma conta? Cadastre-se aqui!'
+                    onPress={() => navigation.navigate("Main")}
                 />
             </Row>
         </Container>
