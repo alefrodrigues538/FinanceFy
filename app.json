@@ -4,39 +4,29 @@
     "slug": "FinanceFy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIden": "com.virtuamoon.FinanceFy",
-      "bundleIdentifier": "n"
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.virtuamoon.FinanceFy",
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./src/assets/images/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "7e30298b-c519-4730-b155-d80fdb2b70e9"
-      }
+      "bundler": "metro",
+      "favicon": "./assets/images/favicon.png"
     }
   }
 }
